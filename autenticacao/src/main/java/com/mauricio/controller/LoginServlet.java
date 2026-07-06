@@ -6,15 +6,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.mauricio.data.BancoUsuario;
+import com.mauricio.db.ConexaoDB;
+import com.mauricio.db.UsuarioDAO;
 import com.mauricio.model.Usuario;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         // Garante que requisições e respostas processem acentos corretamente
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -22,16 +29,12 @@ public class LoginServlet extends HttpServlet {
         // Seu código vem aqui
         String usuarioDigitado = request.getParameter("usuario");
         String senhaDigitada = request.getParameter("senha");
-        Usuario usuarioLogado = null;
 
-        for(Usuario u : BancoUsuario.lista) {
-            if(u.getUsuario().equals(usuarioDigitado) && u.getSenha().equals(senhaDigitada)) {
-                usuarioLogado = u;
-                break;
-            }
-        }
+        UsuarioDAO dao = new UsuarioDAO();
 
-        if(usuarioLogado != null) {
+        Usuario usuarioLogado = dao.autenticar(usuarioDigitado, senhaDigitada);
+
+        if (usuarioLogado != null) {
             // login esta autorizado
             request.getRequestDispatcher("bemvindo.jsp").forward(request, response);
         } else {
