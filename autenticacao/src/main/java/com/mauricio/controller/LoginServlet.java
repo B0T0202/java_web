@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ import java.sql.SQLException;
 
 import com.mauricio.data.BancoUsuario;
 import com.mauricio.db.ConexaoDB;
+=======
+>>>>>>> 154f1b6735c6546653344f659270b98ebe3abb46
 import com.mauricio.db.UsuarioDAO;
 import com.mauricio.model.Usuario;
 
@@ -33,8 +36,13 @@ public class LoginServlet extends HttpServlet {
         UsuarioDAO dao = new UsuarioDAO();
 
         Usuario usuarioLogado = dao.autenticar(usuarioDigitado, senhaDigitada);
+<<<<<<< HEAD
 
         if (usuarioLogado != null) {
+=======
+        
+        if(usuarioLogado != null) {
+>>>>>>> 154f1b6735c6546653344f659270b98ebe3abb46
             // login esta autorizado
             request.getRequestDispatcher("bemvindo.jsp").forward(request, response);
         } else {

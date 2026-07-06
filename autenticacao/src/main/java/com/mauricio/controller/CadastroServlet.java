@@ -7,7 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+<<<<<<< HEAD
 import com.mauricio.data.BancoUsuario;
+=======
+>>>>>>> 154f1b6735c6546653344f659270b98ebe3abb46
 import com.mauricio.db.UsuarioDAO;
 import com.mauricio.model.Usuario;
 
@@ -31,11 +34,14 @@ public class CadastroServlet extends HttpServlet {
         UsuarioDAO dao = new UsuarioDAO();
         boolean sucesso = dao.cadastrar(novoUsuario);
 
+<<<<<<< HEAD
         if (!sucesso) {
+=======
+        if(!sucesso) {
+>>>>>>> 154f1b6735c6546653344f659270b98ebe3abb46
             request.setAttribute("mensagemErro", "Este usuário já existe!");
             request.getRequestDispatcher("cadastro.jsp").forward(request, response);
         } else {
-            BancoUsuario.lista.add(new Usuario(nomeDigitado, usuarioDigitado, senhaDigitada));
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
